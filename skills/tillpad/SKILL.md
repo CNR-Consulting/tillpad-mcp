@@ -19,7 +19,7 @@ Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, fi
 2. `POST https://tillpad.cnrcode.com/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and `{ "sku": "pro_prepaid_30d" }`
 3. Settle Stripe MPP ($9.00 / 30 days) → response includes `secret` (`tp_…`) and `planPeriodEnd`
 
-Or use MCP tools `bootstrap_agent` and `manage_billing` (`action=machine_pay`).
+Zero-human account creation is REST-only (`POST /api/agents/bootstrap`) because MCP requires `Authorization: Bearer tp_…` before any tool runs. After you have an account key, use MCP `manage_billing` (`action=machine_pay`) for top-ups.
 
 ## Typical agent loop
 

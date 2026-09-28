@@ -32,7 +32,7 @@ curl -s -X POST https://tillpad.cnrcode.com/api/billing/machine-pay \
 # MPP settle → secret tp_… + planPeriodEnd
 ```
 
-Or use MCP tools `bootstrap_agent` and `manage_billing` (`action=machine_pay`). Top-up SKUs (`topup_kvp_10k`, `topup_storage_1gb`) require active Pro — see `GET /api/config` → `plans.agentSkus`.
+Zero-human account creation is REST-only (`POST /api/agents/bootstrap`) because MCP requires `Authorization: Bearer tp_…` before any tool runs. After you have an account key, use MCP `manage_billing` (`action=machine_pay`) for top-ups. Top-up SKUs (`topup_kvp_10k`, `topup_storage_1gb`) require active Pro — see `GET /api/config` → `plans.agentSkus`.
 
 Legal: https://tillpad.cnrcode.com/terms · https://tillpad.cnrcode.com/privacy · https://tillpad.cnrcode.com/refunds
 

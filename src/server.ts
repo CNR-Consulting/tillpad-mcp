@@ -142,7 +142,7 @@ server.tool(
 
 server.tool(
   "bootstrap_agent",
-  "Start zero-human onboarding from an email address. Writes a bootstrap account and returns bootstrapToken, accountId, expiresIn, next, and machinePay (url, sku, amount). Does not send email and does not charge. Next call is manage_billing action=machine_pay, or POST /api/billing/machine-pay with Authorization: Bearer bootstrapToken. Use create_api_key afterward to mint run or sub keys from the resulting account tp_ key. No quota spend. No API key is required. Former name: agent_bootstrap.",
+  "Start zero-human onboarding from an email address. Writes a bootstrap account and returns bootstrapToken, accountId, expiresIn, next, and machinePay (url, sku, amount). Does not send email and does not charge. When you have no tp_ key yet, use REST POST /api/agents/bootstrap instead — the MCP endpoint requires Authorization: Bearer tp_… before any tool runs. After bootstrap, call manage_billing action=machine_pay, or POST /api/billing/machine-pay with Authorization: Bearer bootstrapToken. Use create_api_key afterward to mint run or sub keys from the resulting account tp_ key. No quota spend. Former name: agent_bootstrap.",
   {
     email: z
       .string()
