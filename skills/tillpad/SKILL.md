@@ -19,33 +19,33 @@ Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, fi
 2. `POST https://tillpad.cnrcode.com/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and `{ "sku": "pro_prepaid_30d" }`
 3. Settle Stripe MPP ($9.00 / 30 days) → response includes `secret` (`tp_…`) and `planPeriodEnd`
 
-Or use MCP tools `agent_bootstrap` and `billing_machine_pay`.
+Or use MCP tools `bootstrap_agent` and `manage_billing` (`action=machine_pay`).
 
 ## Typical agent loop
 
-1. Mint a **run** key with `keys_create` (or dashboard) — dedicated namespace, TTL, optional op budget
-2. Store working state with `kvp_put` and/or `file_upload`
-3. Retrieve with `kvp_get` / `kvp_list` and `rag_search`
-4. Call `run_finish` to wipe run namespaces and keep the signed receipt
+1. Mint a **run** key with `create_api_key` (or the dashboard): dedicated namespace, TTL, optional op budget
+2. Store working state with `manage_kv` and/or `index_document`
+3. Retrieve with `manage_kv` (`action=get` or `action=list`) and `search_documents`
+4. Call `finish_run` to wipe run namespaces and keep the signed receipt
 
-Use `budget_estimate` before large index jobs. `budget_get` / `usage_get` show remaining quota.
+Use `estimate_usage` before large index jobs. `get_usage` shows remaining quota.
 
 ## Receive-only email inboxes
 
 Agents can provision **inbound-only** addresses on Tillpad's configured domain (`GET /api/config` → `inboundEmailDomain`, default `centralmail.us`). No outbound send — receive, store, and read only.
 
-**Create an inbox** with `inbox_create`:
+**Create an inbox** with `manage_inbox` `action=create`:
 
 - `kind`: `temporary` (TTL expires and purges) or `permanent`
 - `localPart`: the address prefix before `@domain`
 
-**Read mail** via `inbox_messages_list`, `inbox_message_get`, `inbox_message_raw` (raw MIME, meters 1 kvp_op), and `inbox_attachment_get` (base64, meters 1 kvp_op).
+**Read mail** via `read_inbox_message`: `action=list`, `action=get`, `action=raw` (raw MIME, meters 1 kvp_op), and `action=attachment` (base64, meters 1 kvp_op).
 
-**Webhooks:** register with `inbox_webhook_create` for HMAC-signed `email.received` notifications (metadata only — no body in the webhook payload). Monitor failures with `inbox_webhook_deliveries_list` (`status=failed` after retries).
+**Webhooks:** register with `manage_inbox_webhook` `action=create` for HMAC-signed `email.received` notifications (metadata only, no body in the webhook payload). Monitor failures with `action=deliveries` (`status=failed` after retries).
 
-**Blocklist:** `inbox_blocklist_add` / `inbox_blocklist_delete` to block sender addresses or entire domains account-wide.
+**Blocklist:** `manage_inbox_blocklist` `action=add` / `action=delete` to block sender addresses or entire domains account-wide.
 
-**Audit:** `inbox_audit_list` for who created inboxes and received messages.
+**Audit:** `manage_inbox` `action=audit` for who created inboxes and received messages.
 
 Inbound email is metered (`inbound_email` quota). See llms-full.txt for REST equivalents under `/api/inboxes`.
 

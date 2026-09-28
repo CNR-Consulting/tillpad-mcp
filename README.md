@@ -117,58 +117,33 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 
 | Tool | What it does |
 |------|----------------|
-| `usage_get` | Usage and quotas (`periodYm` optional for a past calendar month) |
-| `usage_periods_list` | List stored usage periods with meter totals |
-| `budget_get` | Remaining quotas, soft thresholds, and a checkout URL |
-| `budget_estimate` | Preflight 402/429 before spending (`textLength` / `byteLength` for `rag_index`) |
-| `billing_machine_pay` | How agents unlock prepaid Pro or buy SKUs via Stripe MPP (`sku` optional) |
-| `billing_portal` | Stripe Customer Portal URL for subscription management and invoices |
-| `billing_purchases_list` | Local payment history; optional `includeStripe` for backfill |
-| `agent_bootstrap` | Zero-human onboarding: bootstrap token from email (no outbound mail) |
-| `keys_create` | Mint a run/sub key from an account `tp_` key |
-| `kvp_put` | Store a string under a namespace/key (response includes `budget`) |
-| `kvp_get` | Read a namespaced value |
-| `kvp_delete` | Delete a KVP key |
-| `kvp_list` | List keys in a namespace |
-| `memory_put` | Store under memory scope `prefs` / `facts` / `run` (KVP) |
-| `memory_get` | Read from a memory scope |
-| `memory_search` | Semantic search; optional `scope` filters to a memory namespace |
-| `file_upload` | Upload UTF-8 text for RAG indexing (prefLights `rag_index`) |
-| `files_list` | List uploaded files |
-| `files_types` | Supported upload extensions and MIME types |
-| `rag_note` | Index plain text without multipart (same pipeline as `file_upload`) |
-| `rag_search` | Semantic search over indexed documents |
-| `inspect_storage` | Namespace inventory (scoped to the key when applicable) |
-| `run_finish` | Wipe namespaces bound to this **run** key; returns a signed wipe receipt |
-| `support_contact` | Contact Tillpad support from a **Pro** account; replies go to the account email |
-| `inbox_create` | Create a receive-only email inbox (temporary or permanent) |
-| `inbox_list` | List active receive-only inboxes |
-| `inbox_get` | Get one inbox by id |
-| `inbox_delete` | Delete an inbox and purge stored messages |
-| `inbox_messages_list` | List message metadata for an inbox |
-| `inbox_message_get` | Get message metadata and attachment list |
-| `inbox_message_raw` | Download raw MIME (meters 1 kvp_op) |
-| `inbox_attachment_get` | Download an attachment as base64 (meters 1 kvp_op) |
-| `inbox_webhook_create` | Register HTTPS webhook for `email.received` (metadata only) |
-| `inbox_webhook_list` | List registered email webhooks |
-| `inbox_webhook_delete` | Disable an email webhook |
-| `inbox_webhook_deliveries_list` | Webhook delivery log; use `status=failed` for failures |
-| `inbox_audit_list` | Inbox audit log for the account |
-| `inbox_blocklist_list` | List blocked sender addresses and domains |
-| `inbox_blocklist_add` | Block a sender address or entire domain |
-| `inbox_blocklist_delete` | Remove a blocklist entry |
-| `schedule_create` | Create HTTPS interval schedule (`outbound_http` per attempt + `notify_webhook`; auto-disable after consecutive failures) |
-| `schedule_list` / `schedule_get` / `schedule_delete` | Manage schedules |
-| `schedule_runs_list` | Schedule run/attempt log |
+| `get_usage` | Usage for one month (`view=summary`), paged history (`view=periods`), or remaining quotas (`view=budget`) |
+| `estimate_usage` | Preflight 402/429 before a meter spend (`textLength` / `byteLength` for `rag_index`) |
+| `manage_billing` | MPP machine-pay instructions (`action=machine_pay`), Stripe portal URL, or purchase history |
+| `bootstrap_agent` | Zero-human onboarding: bootstrap token from email (no outbound mail) |
+| `create_api_key` | Mint a run or sub key from an account `tp_` key |
+| `manage_kv` | Put, get, delete, or list a namespaced string |
+| `manage_memory` | Put or get memory scope `prefs` / `facts` / `run` |
+| `search_documents` | Semantic search over indexed documents or a memory scope |
+| `index_document` | Index a named UTF-8 file (`kind=file`) or a short note (`kind=note`) |
+| `list_files` | List uploads (`view=files`) or supported types (`view=supported_types`) |
+| `get_storage_summary` | Namespace inventory (scoped to the key when applicable) |
+| `finish_run` | Wipe namespaces bound to this **run** key; returns a signed wipe receipt |
+| `contact_support` | Contact Tillpad support from a **Pro** account; replies go to the account email |
+| `manage_inbox` | Create, list, get, delete, or audit receive-only inboxes |
+| `read_inbox_message` | List metadata, get one message, download raw MIME, or fetch an attachment |
+| `manage_inbox_webhook` | Register, list, disable, or inspect `email.received` webhook deliveries |
+| `manage_inbox_blocklist` | List, add, or remove a blocked sender address or domain |
+| `manage_schedule` | Create, list, get, disable, or list runs for HTTPS interval jobs |
 
 ## Typical agent loop
 
-1. Mint a **run** key in the dashboard (dedicated namespace, TTL, optional op budget).
-2. Store working state with `memory_put` / `kvp_put` and/or `rag_note` / `file_upload`.
-3. Retrieve with `memory_get` / `kvp_get` / `kvp_list` and `memory_search` / `rag_search`.
-4. Call `run_finish` to wipe run namespaces and keep the signed receipt.
+1. Mint a **run** key with `create_api_key` (or the dashboard): dedicated namespace, TTL, optional op budget.
+2. Store working state with `manage_memory` / `manage_kv` and/or `index_document`.
+3. Retrieve with `manage_memory` / `manage_kv` and `search_documents`.
+4. Call `finish_run` to wipe run namespaces and keep the signed receipt.
 
-Use `budget_estimate` before large index jobs. `budget_get` / `usage_get` show what is left in the period.
+Use `estimate_usage` before large index jobs. `get_usage` shows what is left in the period.
 
 ## Auth and errors
 
@@ -205,7 +180,7 @@ Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](htt
 
 ### Glama
 
-This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the **44** tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
+This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the **18** tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
 
 Listing: [glama.ai/mcp/servers/number1101/tillpad-mcp](https://glama.ai/mcp/servers/number1101/tillpad-mcp)
 
