@@ -3,8 +3,8 @@
   "name": "com.cnrcode/tillpad",
   "title": "Tillpad",
   "description": "Bounded KVP, RAG search, and wipe receipts for agent jobs over remote MCP",
-  "version": "0.1.4",
-  "websiteUrl": "https://tillpad.cnrcode.com",
+  "version": "0.1.5",
+  "websiteUrl": "https://tillpad.dev",
   "repository": {
     "url": "https://github.com/CNR-Consulting/tillpad-mcp",
     "source": "github"
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://tillpad.cnrcode.com/mcp",
+      "url": "https://tillpad.dev/mcp",
       "headers": [
         {
           "name": "Authorization",

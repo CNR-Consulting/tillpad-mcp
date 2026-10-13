@@ -39,13 +39,13 @@ After the listing passes and the badge URL resolves, edit the Tillpad line on br
 **Before:**
 
 ```markdown
-- [number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) 📇 ☁️ - Tillpad: bounded storage and search for agent jobs. Remote MCP at https://tillpad.cnrcode.com/mcp (streamable HTTP, Bearer auth). Docs: https://tillpad.cnrcode.com/docs
+- [number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) 📇 ☁️ - Tillpad: bounded storage and search for agent jobs. Remote MCP at https://tillpad.dev/mcp (streamable HTTP, Bearer auth). Docs: https://tillpad.dev/docs
 ```
 
 **After:**
 
 ```markdown
-- [CNR-Consulting/tillpad-mcp](https://github.com/CNR-Consulting/tillpad-mcp) [![number1101/tillpad-mcp MCP server](https://glama.ai/mcp/servers/number1101/tillpad-mcp/badges/score.svg)](https://glama.ai/mcp/servers/number1101/tillpad-mcp) 📇 ☁️ - Tillpad: bounded storage and search for agent jobs. Remote MCP at https://tillpad.cnrcode.com/mcp (streamable HTTP, Bearer auth). Docs: https://tillpad.cnrcode.com/docs
+- [CNR-Consulting/tillpad-mcp](https://github.com/CNR-Consulting/tillpad-mcp) [![number1101/tillpad-mcp MCP server](https://glama.ai/mcp/servers/number1101/tillpad-mcp/badges/score.svg)](https://glama.ai/mcp/servers/number1101/tillpad-mcp) 📇 ☁️ - Tillpad: bounded storage and search for agent jobs. Remote MCP at https://tillpad.dev/mcp (streamable HTTP, Bearer auth). Docs: https://tillpad.dev/docs
 ```
 
 Reply on PR #13043 that Glama checks are complete.
@@ -59,4 +59,4 @@ docker build -t tillpad-mcp-stub . && docker run -i tillpad-mcp-stub
 
 ## Optional: hosted connector
 
-Separate from the servers badge. Product already serves `https://tillpad.cnrcode.com/.well-known/glama.json` for connector claim at [glama.ai/mcp/connectors](https://glama.ai/mcp/connectors).
+Separate from the servers badge. Product already serves `https://tillpad.dev/.well-known/glama.json` for connector claim at [glama.ai/mcp/connectors](https://glama.ai/mcp/connectors).

@@ -11,12 +11,12 @@ description: >-
 
 Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, file upload + RAG search, receive-only email inboxes, budget-aware metering, and run keys that wipe with a signed receipt.
 
-**Live endpoint:** https://tillpad.cnrcode.com/mcp
+**Live endpoint:** https://tillpad.dev/mcp
 
 ## Zero-human bootstrap
 
-1. `POST https://tillpad.cnrcode.com/api/agents/bootstrap` with `{ "email": "agent@example.com" }` → `bootstrapToken`
-2. `POST https://tillpad.cnrcode.com/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and `{ "sku": "pro_prepaid_30d" }`
+1. `POST https://tillpad.dev/api/agents/bootstrap` with `{ "email": "agent@example.com" }` → `bootstrapToken`
+2. `POST https://tillpad.dev/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and `{ "sku": "pro_prepaid_30d" }`
 3. Settle Stripe MPP ($9.00 / 30 days) → response includes `secret` (`tp_…`) and `planPeriodEnd`
 
 Zero-human account creation is REST-only (`POST /api/agents/bootstrap`) because MCP requires `Authorization: Bearer tp_…` before any tool runs. After you have an account key, use MCP `manage_billing` (`action=machine_pay`) for top-ups.
@@ -53,13 +53,13 @@ Inbound email is metered (`inbound_email` quota). See llms-full.txt for REST equ
 
 | Resource | URL |
 |----------|-----|
-| LLM site map | https://tillpad.cnrcode.com/llms.txt |
-| Full agent guide | https://tillpad.cnrcode.com/llms-full.txt |
-| Scratchpad quickstart | https://tillpad.cnrcode.com/scratchpad.txt |
-| MCP discovery | https://tillpad.cnrcode.com/.well-known/mcp.json |
+| LLM site map | https://tillpad.dev/llms.txt |
+| Full agent guide | https://tillpad.dev/llms-full.txt |
+| Scratchpad quickstart | https://tillpad.dev/scratchpad.txt |
+| MCP discovery | https://tillpad.dev/.well-known/mcp.json |
 
 ## Billing errors
 
 402/429 responses include `code`, `actions` (checkout or machine_pay), and `budget`. Follow the offered actions — do not invent a billing flow.
 
-Legal: https://tillpad.cnrcode.com/terms
+Legal: https://tillpad.dev/terms

@@ -7,7 +7,7 @@ The hosted product is not developed here. Pull requests that add production Work
 ## Welcome changes
 
 - Doc fixes (install snippets, tool descriptions, links)
-- Schema drift: tool **names**, descriptions, and input shapes must match the hosted server at `https://tillpad.cnrcode.com/mcp`
+- Schema drift: tool **names**, descriptions, and input shapes must match the hosted server at `https://tillpad.dev/mcp`
 - Registry metadata in `server.json` (keep `remotes[0].url` on the production endpoint; registry name is `com.cnrcode/tillpad`)
 
 ## MCP Registry publish
