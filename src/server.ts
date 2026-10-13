@@ -3,18 +3,18 @@
  *
  * This is not the hosted Tillpad MCP server. Tool names, descriptions, and
  * input shapes match production. Handlers only tell clients to use:
- *   https://tillpad.cnrcode.com/mcp
+ *   https://tillpad.dev/mcp
  *   Authorization: Bearer tp_…
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
-const HOSTED_MCP = "https://tillpad.cnrcode.com/mcp";
+const HOSTED_MCP = "https://tillpad.dev/mcp";
 
 const stubMessage =
   "This repository is a catalog stub. Connect to " +
   HOSTED_MCP +
-  " with Authorization: Bearer tp_… (mint a key at https://tillpad.cnrcode.com).";
+  " with Authorization: Bearer tp_… (mint a key at https://tillpad.dev).";
 
 function stub() {
   return {

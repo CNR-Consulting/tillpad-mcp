@@ -2,15 +2,17 @@
 
 **Bounded storage and search for agent jobs.**
 
-[![Remote MCP](https://img.shields.io/badge/MCP-remote-555?style=flat-square)](https://tillpad.cnrcode.com/mcp)
+[![Remote MCP](https://img.shields.io/badge/MCP-remote-555?style=flat-square)](https://tillpad.dev/mcp)
 [![Transport](https://img.shields.io/badge/transport-streamable--http-0ea5e9?style=flat-square)](https://modelcontextprotocol.io)
-[![Auth](https://img.shields.io/badge/auth-Bearer%20tp__-111?style=flat-square)](https://tillpad.cnrcode.com)
+[![Auth](https://img.shields.io/badge/auth-Bearer%20tp__-111?style=flat-square)](https://tillpad.dev)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 [![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/number1101/tillpad-mcp)
 
 Tillpad gives agents namespaced key-value storage, file upload + semantic search, receive-only email inboxes, budget-aware metering, and run keys that wipe with a signed receipt when the job is done.
 
-**Live endpoint:** [`https://tillpad.cnrcode.com/mcp`](https://tillpad.cnrcode.com/mcp)
+**Live endpoint:** [`https://tillpad.dev/mcp`](https://tillpad.dev/mcp)
+
+The previous endpoint `https://tillpad.cnrcode.com/mcp` keeps serving the same server, so existing client configs keep working.
 
 > This repository is the **public catalog and schema stub** for directory crawlers. It is not the hosted server. Point MCP clients at the live URL above with a Tillpad API key. Running the TypeScript in this repo does not store or search anything.
 
@@ -20,16 +22,16 @@ Tillpad gives agents namespaced key-value storage, file upload + semantic search
 
 ### Zero-human (agents)
 
-1. `POST https://tillpad.cnrcode.com/api/agents/bootstrap` with `{ "email": "agent@example.com" }` → `bootstrapToken` (no outbound mail).
-2. `POST https://tillpad.cnrcode.com/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and optional `{ "sku": "pro_prepaid_30d" }`.
+1. `POST https://tillpad.dev/api/agents/bootstrap` with `{ "email": "agent@example.com" }` → `bootstrapToken` (no outbound mail).
+2. `POST https://tillpad.dev/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and optional `{ "sku": "pro_prepaid_30d" }`.
 3. Settle Stripe MPP ($9.00 / 30 days) → response includes `secret` (`tp_…`) and `planPeriodEnd`.
 
-See [scratchpad.txt](https://tillpad.cnrcode.com/scratchpad.txt) and [llms-full.txt](https://tillpad.cnrcode.com/llms-full.txt). Legal: [Terms](https://tillpad.cnrcode.com/terms).
+See [scratchpad.txt](https://tillpad.dev/scratchpad.txt) and [llms-full.txt](https://tillpad.dev/llms-full.txt). Legal: [Terms](https://tillpad.dev/terms).
 
 ### Human path
 
-1. Open [tillpad.cnrcode.com](https://tillpad.cnrcode.com) and create an account.
-2. Subscribe to Tillpad Pro on [Pricing](https://tillpad.cnrcode.com/pricing), then mint an API key in the dashboard. Secrets start with `tp_`.
+1. Open [tillpad.dev](https://tillpad.dev) and create an account.
+2. Subscribe to Tillpad Pro on [Pricing](https://tillpad.dev/pricing), then mint an API key in the dashboard. Secrets start with `tp_`.
 3. Use an **account** key for ongoing access, or a **run** key when the job should expire and wipe.
 
 Never commit a real key. Use the `tp_…` placeholder in configs.
@@ -50,7 +52,7 @@ Tillpad MCP tools cover namespaced KVP, RAG search, **receive-only email inboxes
 2. Open **Cursor Settings → Customize → Tillpad** and set **Tillpad API key** (`tp_…` from bootstrap + machine-pay or the dashboard).
 3. Reload the window. MCP tools should appear under the Tillpad server.
 
-The plugin points at `https://tillpad.cnrcode.com/mcp` with `Authorization: Bearer ${TILLPAD_API_KEY}`. Never commit a real key.
+The plugin points at `https://tillpad.dev/mcp` with `Authorization: Bearer ${TILLPAD_API_KEY}`. Never commit a real key.
 
 **Local plugin test** (before marketplace submission):
 
@@ -72,7 +74,7 @@ User or project MCP config:
 {
   "mcpServers": {
     "tillpad": {
-      "url": "https://tillpad.cnrcode.com/mcp",
+      "url": "https://tillpad.dev/mcp",
       "headers": {
         "Authorization": "Bearer tp_…"
       }
@@ -88,7 +90,7 @@ User or project MCP config:
   "mcpServers": {
     "tillpad": {
       "command": "npx",
-      "args": ["mcp-remote", "https://tillpad.cnrcode.com/mcp", "--header", "Authorization: Bearer tp_…"]
+      "args": ["mcp-remote", "https://tillpad.dev/mcp", "--header", "Authorization: Bearer tp_…"]
     }
   }
 }
@@ -98,7 +100,7 @@ User or project MCP config:
 
 ```json
 {
-  "url": "https://tillpad.cnrcode.com/mcp",
+  "url": "https://tillpad.dev/mcp",
   "headers": {
     "Authorization": "Bearer tp_…"
   }
@@ -107,9 +109,9 @@ User or project MCP config:
 
 Discovery manifests on the product host:
 
-- [/.well-known/mcp.json](https://tillpad.cnrcode.com/.well-known/mcp.json)
-- [/.well-known/mcp/server.json](https://tillpad.cnrcode.com/.well-known/mcp/server.json)
-- [/llms.txt](https://tillpad.cnrcode.com/llms.txt)
+- [/.well-known/mcp.json](https://tillpad.dev/.well-known/mcp.json)
+- [/.well-known/mcp/server.json](https://tillpad.dev/.well-known/mcp/server.json)
+- [/llms.txt](https://tillpad.dev/llms.txt)
 
 ## Tools
 
@@ -156,10 +158,10 @@ This is Stripe Machine Payments Protocol, not ChatGPT Instant Checkout / ACP.
 
 ## Product docs
 
-- App: [tillpad.cnrcode.com](https://tillpad.cnrcode.com)
-- Docs: [tillpad.cnrcode.com/docs](https://tillpad.cnrcode.com/docs)
-- Scratchpad: [tillpad.cnrcode.com/docs/scratchpad](https://tillpad.cnrcode.com/docs/scratchpad)
-- OpenAPI: [tillpad.cnrcode.com/openapi.json](https://tillpad.cnrcode.com/openapi.json)
+- App: [tillpad.dev](https://tillpad.dev)
+- Docs: [tillpad.dev/docs](https://tillpad.dev/docs)
+- Scratchpad: [tillpad.dev/docs/scratchpad](https://tillpad.dev/docs/scratchpad)
+- OpenAPI: [tillpad.dev/openapi.json](https://tillpad.dev/openapi.json)
 
 The Tillpad product (Worker, billing, storage) is closed source. This catalog is MIT-licensed so directories can list tools and install snippets.
 
