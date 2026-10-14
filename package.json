@@ -2,7 +2,7 @@
   "name": "tillpad-mcp",
   "version": "0.1.0",
   "private": true,
-  "description": "Catalog and schema stub for the hosted Tillpad remote MCP server",
+  "description": "Everything your AI agents need to do their jobs, with a spending cap they can't go over.",
   "type": "module",
   "license": "MIT",
   "keywords": [

@@ -1,6 +1,6 @@
 # Tillpad MCP
 
-**Bounded storage and search for agent jobs.**
+**Everything your AI agents need to do their jobs, with a spending cap they can't go over.**
 
 [![Remote MCP](https://img.shields.io/badge/MCP-remote-555?style=flat-square)](https://tillpad.dev/mcp)
 [![Transport](https://img.shields.io/badge/transport-streamable--http-0ea5e9?style=flat-square)](https://modelcontextprotocol.io)
