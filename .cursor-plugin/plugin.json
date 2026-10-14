@@ -1,7 +1,7 @@
 {
   "name": "tillpad",
   "version": "0.1.2",
-  "description": "Bounded KVP, RAG search, receive-only email inboxes, and wipe receipts for agent jobs",
+  "description": "Everything your AI agents need to do their jobs, with a spending cap they can't go over.",
   "author": { "name": "CNR Code", "url": "https://tillpad.dev" },
   "homepage": "https://tillpad.dev",
   "repository": "https://github.com/CNR-Consulting/tillpad-mcp",
