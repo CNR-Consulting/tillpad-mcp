@@ -3,7 +3,16 @@
   "name": "com.cnrcode/tillpad",
   "title": "Tillpad",
   "description": "Everything your AI agents need to do their jobs, with a spending cap they can't go over.",
-  "version": "0.1.5",
+  "version": "0.1.6",
+  "icons": [
+    {
+      "src": "https://tillpad.dev/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
   "websiteUrl": "https://tillpad.dev",
   "repository": {
     "url": "https://github.com/CNR-Consulting/tillpad-mcp",
