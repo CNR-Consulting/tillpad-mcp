@@ -3,7 +3,7 @@
   "name": "com.cnrcode/tillpad",
   "title": "Tillpad",
   "description": "Everything your AI agents need to do their jobs, with a spending cap they can't go over.",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "icons": [
     {
       "src": "https://tillpad.dev/icon-512.png",
