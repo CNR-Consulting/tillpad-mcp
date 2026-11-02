@@ -174,8 +174,8 @@ Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](htt
 3. Push a version tag so [GitHub Actions](.github/workflows/publish-mcp.yml) publishes `server.json` to the [official MCP Registry](https://registry.modelcontextprotocol.io):
 
    ```bash
-   git tag v0.1.1
-   git push origin v0.1.1
+   git tag v0.2.0
+   git push origin v0.2.0
    ```
 
 4. Optionally submit [https://github.com/CNR-Consulting/tillpad-mcp](https://github.com/CNR-Consulting/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).

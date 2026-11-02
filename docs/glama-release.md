@@ -29,7 +29,7 @@ Glama wraps CMD with `mcp-proxy --`. Do not mix npm build steps with a pnpm CMD.
 ## 3. Deploy and release
 
 1. Click **Deploy** and wait for the build test (build + boot + introspection).
-2. On success, click **Make Release** (e.g. version `0.1.1`).
+2. On success, click **Make Release** (e.g. version `0.2.0`).
 3. Optional: use **Try in Browser** once if Glama flags low usage.
 
 ## 4. Update awesome-mcp-servers PR
